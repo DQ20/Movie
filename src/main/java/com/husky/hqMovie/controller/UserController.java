@@ -43,7 +43,8 @@ public class UserController extends BaseController{
         String name=(String)session.getAttribute("uname");
         String oldPassword=jsonObject.getString("oldPassword");
         String newPassword=jsonObject.getString("newPassword");
-        service.modifyPassword(name,oldPassword,newPassword);
+        String confirmNewPassword=jsonObject.getString("confirmNewPassword");
+        service.modifyPassword(name,oldPassword,newPassword,confirmNewPassword);
         return new JsonResult<>(OK);
     }
     @PutMapping("/modifyInfo")

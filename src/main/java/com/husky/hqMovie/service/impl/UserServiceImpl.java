@@ -95,7 +95,13 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public void modifyPassword(String name, String oldPassword, String newPassword) {
+    public void modifyPassword(String name, String oldPassword, String newPassword,String confirmNewPassword){
+        if (newPassword==null||confirmNewPassword==null||oldPassword==null){
+            throw new NullPasswordException("密码不能为空");
+        }
+        if (!newPassword.equals(confirmNewPassword)){
+            throw new PasswordNotTrueException("两次输入的新密码不一致");
+        }
         User user = mapper.selectUserByName(name);
         String salt=user.getSalt();
         String pwd=user.getPassword();
