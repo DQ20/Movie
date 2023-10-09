@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 body{
-    background-color: brown;
+    background-color: #759610;
 }
 ul{
     list-style: none;
@@ -14,7 +14,7 @@ ul{
     margin-top: 10vh;
     height: 80vh;
     width: 12vw;
-    /* background-color: pink; */
+    background-color: #9cc913;
     border-radius: 0 10px 10px 0;
 }
 .oneList>li>img{
@@ -29,8 +29,9 @@ li{
     text-align: center;
     margin-top: 20px;
 }
-.exit{
-    margin-top: 35vh;
+#exitBtn{
+    cursor: pointer;
+    margin-top: 28vh;
 }
 .twoList{
 /* background-color: blanchedalmond; */
@@ -95,7 +96,8 @@ visibility: hidden;
     right: 0;
     width: 20%;
     height: 100%;
-    /* background-color: aqua; */
+    background-color: #9cc913;
+    border-radius: 10px 0 0 0;
 }
 .movieShow{
     display: inline-block;
@@ -103,8 +105,57 @@ visibility: hidden;
     margin-top: 2vh;
     width: 66vw;
     height: 87.44vh;
-    background-color: azure;
+    background-color: #759610;
 }
 .info{
     cursor: pointer;
+}
+.walletLi{
+    cursor: pointer;
+}
+/* 新增样式规则，用于电影容器 */
+/* 样式规则用于电影容器 */
+/* 电影容器样式 */
+.movie {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin: 20px;
+    display: inline-block;
+    width: calc(33% - 40px); /* 33.33%宽度，并减去外边距 */
+    text-align: left; /* 文本居左 */
+    position: relative; /* 为购买按钮创建相对定位的容器 */
+}
+
+/* 电影名称样式 */
+.movie h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    white-space: nowrap; /* 防止电影名称换行 */
+    overflow: hidden; /* 隐藏超出容器的文本 */
+    text-overflow: ellipsis; /* 超出部分用省略号表示 */
+}
+
+/* 电影信息样式 */
+.movie p {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+/* 购买按钮样式 */
+.buy-button {
+    position: absolute; /* 相对定位 */
+    bottom: 10px; /* 距离底部 10px */
+    right: 10px; /* 距离右侧 10px */
+    padding: 5px 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.buy-button:hover {
+    background-color: #0056b3;
 }

@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoginInterceptorConfig implements WebMvcConfigurer {
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         HandlerInterceptor interceptor=new LoginInterceptor();
         List<String> list=new ArrayList<>();
         list.add("/css/**");
         list.add("/js/**");
+        list.add("/images/**");
         list.add("/index.html");
         list.add("/web/register.html");
         list.add("/web/login.html");

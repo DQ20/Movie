@@ -12,7 +12,6 @@ public class User {
     @Size(min = 0,max = 120)
     private Integer age;
     private String registerDate;
-    private Integer moneyId;
     @Email(message = "邮箱格式不正确")
     private String email;
     private String phone;

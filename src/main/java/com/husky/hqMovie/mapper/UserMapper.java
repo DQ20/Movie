@@ -12,13 +12,12 @@ public interface UserMapper {
     User selectUserById(Integer id);
     @Select("select * from t_users where name=#{name}")
     User selectUserByName(String name);
-    @Insert("insert into t_users values (null,#{name},#{gender},#{age},#{registerDate},#{moneyId},#{email},#{phone},#{salt},#{password})")
+    @Insert("insert into t_users values (null,#{name},#{gender},#{age},#{registerDate},#{email},#{phone},#{salt},#{password})")
     @Results(id = "baseUserMap",value = {
             @Result(column = "name",property = "name"),
             @Result(column = "gender",property = "gender"),
             @Result(column = "age",property = "age"),
             @Result(column = "registerDate",property = "registerDate"),
-            @Result(column = "moneyId",property = "moneyId"),
             @Result(column = "email",property = "email"),
             @Result(column = "phone",property = "phone"),
             @Result(column = "salt",property = "salt"),

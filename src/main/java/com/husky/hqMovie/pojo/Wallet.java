@@ -11,6 +11,8 @@ public class Wallet {
     private String walletName;
     @NotNull
     private Double balance;
-    private Ticket[] hasTicket;
-    private Ticket[] preTicket;
+    private String hasTicket;
+    private String preTicket;
+    @NotNull
+    private Integer id;
 }

@@ -35,6 +35,7 @@ public class UserServiceImpl implements IUserService {
             user.setPassword(newPassword);
             user.setSalt(salt);
             count=mapper.savaUser(user);
+
         }
         if (count!=1){
             throw new InsertException("发生未知异常");

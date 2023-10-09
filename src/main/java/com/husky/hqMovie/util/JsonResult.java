@@ -21,6 +21,12 @@ public class JsonResult<E> implements Serializable {
         this.data = data;
     }
 
+    public JsonResult(Integer state, String massage, E data) {
+        this.state = state;
+        this.massage = massage;
+        this.data = data;
+    }
+
     public JsonResult(ServiceException e) {
         this.massage = e.getMessage();
     }
