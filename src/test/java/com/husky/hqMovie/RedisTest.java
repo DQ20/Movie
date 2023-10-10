@@ -1,20 +1,21 @@
 package com.husky.hqMovie;
 
-import com.husky.hqMovie.service.impl.RedisServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
+
+import java.util.Map;
 
 @SpringBootTest
 public class RedisTest {
     @Autowired
-    RedisServiceImpl redis;
+    private RedisTemplate redisTemplate;
     @Test
     void testRedisSet(){
-        redis.setValue("name","段琪");
-    }
-    @Test
-    void testRedisGet(){
-        System.out.println(redis.getValue("name"));
+        Map map=redisTemplate.opsForHash().entries("Husky_hasTicket");
+        System.out.println(map);
     }
 }

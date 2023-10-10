@@ -28,7 +28,7 @@ public class WalletServiceImpl implements IWalletService {
     }
 
     @Override
-    public int updateBalance(String name, Double balance) {
+    public int topUp(String name, Double balance) {
         Wallet wallet=mapper.selectWalletByName(name);
         balance+=wallet.getBalance();
         wallet.setBalance(balance);

@@ -1,22 +1,38 @@
 package com.husky.hqMovie.service.impl;
 
+import com.husky.hqMovie.mapper.TicketMapper;
 import com.husky.hqMovie.mapper.UserMapper;
+import com.husky.hqMovie.mapper.WalletMapper;
+import com.husky.hqMovie.pojo.Ticket;
 import com.husky.hqMovie.pojo.User;
+import com.husky.hqMovie.pojo.Wallet;
 import com.husky.hqMovie.service.IUserService;
+import com.husky.hqMovie.service.ex.ticketEX.TicketNotExistException;
 import com.husky.hqMovie.service.ex.userEx.*;
+import com.husky.hqMovie.service.ex.walletEx.BalanceException;
+import com.husky.hqMovie.service.ex.walletEx.WalletExistException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
+/**
+ * @author Husky
+ * date:2023-10-10
+ */
 @Service
 public class UserServiceImpl implements IUserService {
     @Autowired
     private UserMapper mapper;
+    @Autowired
+    private TicketMapper ticketMapper;
+    @Autowired
+    private WalletMapper walletMapper;
+    @Autowired
+    private RedisTemplate redisTemplate;
     @Override
     public Integer UserRegister(User user) {
         String name=user.getName();
@@ -124,6 +140,10 @@ public class UserServiceImpl implements IUserService {
             if(user==null){
                 throw new UserExistException("用户不存在");
             }
+            user=mapper.selectUserByName(name);
+            if(user!=null){
+                throw new UserExistException("用户已存在");
+            }
             user.setPhone(phone);
             user.setName(name);
             user.setGender(gender);
@@ -131,6 +151,36 @@ public class UserServiceImpl implements IUserService {
             user.setAge(age);
             mapper.modifyUser(user);
     }
+//需要事务管理、需要多线程开发
+    @Override
+    public void buyTicket(Integer movieId, String name) {
+        Ticket ticket=ticketMapper.selectTicketByTd(movieId);
+        Wallet wallet=walletMapper.selectWalletByName(name);
+        if(ticket==null){
+            throw new TicketNotExistException("该电影不存在...");
+        }
+        else if(wallet==null){
+            throw new WalletExistException("账号不存在...");
+        }
+        Double price=ticket.getPrice();
+        Double balance=wallet.getBalance();
+        if(balance<price){
+            throw new BalanceException("余额不足");
+        }
+        else{
+            balance=balance-price;
+            System.out.println(balance);
+            wallet.setBalance(balance);
+            System.out.println(wallet);
+            walletMapper.updateWallet(wallet);
+            String hasTicket=wallet.getHasTicket();
+            String movieName=ticket.getName();
+            Map<String,Ticket> map=redisTemplate.opsForHash().entries(hasTicket);
+            map.put(movieName,ticket);
+            redisTemplate.opsForHash().putAll(hasTicket,map);
+        }
+    }
+
 
     public String getMD5Password(String password,String salt){
         String newPassword=null;

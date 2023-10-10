@@ -9,6 +9,7 @@ import com.husky.hqMovie.service.impl.WalletServiceImpl;
 import com.husky.hqMovie.util.JsonResult;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -83,5 +84,11 @@ public class UserController extends BaseController{
         String name=(String) session.getAttribute("uname");
         User user = service.selectByName(name);
         return new JsonResult<>(OK,user);
+    }
+    @GetMapping("/buyTicket")
+    public JsonResult buyTicket(@RequestParam(name = "id") Integer movieId, HttpSession session){
+        String name=(String)session.getAttribute("uname");
+        service.buyTicket(movieId,name);
+        return new JsonResult<>(OK);
     }
 }

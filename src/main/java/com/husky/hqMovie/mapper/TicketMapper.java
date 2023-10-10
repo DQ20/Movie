@@ -27,4 +27,6 @@ public interface TicketMapper {
     Integer updateTicket(Ticket ticket);
     @Insert("insert into tickets values (null,#{name},#{price},#{duration},#{startDate},#{startTime},#{room})")
     Integer insetTicket(Ticket ticket);
+    @Select("select * from tickets where id=#{id}")
+    Ticket selectTicketByTd(Integer id);
 }

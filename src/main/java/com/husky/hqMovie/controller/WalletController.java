@@ -18,10 +18,10 @@ public class WalletController extends BaseController{
         Wallet wallet=service.selectWalletByName(name);
         return new JsonResult<>(OK,wallet);
     }
-    @PostMapping ("/updateBanlance")
-    public JsonResult<Wallet> updateBalance(@RequestBody Double balance, HttpSession session){
+    @GetMapping ("/topUp")
+    public JsonResult<Wallet> topUp(@RequestParam(name = "balance") Double balance, HttpSession session){
         String name=(String) session.getAttribute("uname");
-        service.updateBalance(name,balance);
+        service.topUp(name,balance);
         return new JsonResult<>(OK);
     }
 }
