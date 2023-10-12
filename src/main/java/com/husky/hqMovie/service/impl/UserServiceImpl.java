@@ -11,6 +11,8 @@ import com.husky.hqMovie.service.ex.ticketEX.TicketNotExistException;
 import com.husky.hqMovie.service.ex.userEx.*;
 import com.husky.hqMovie.service.ex.walletEx.BalanceException;
 import com.husky.hqMovie.service.ex.walletEx.WalletExistException;
+import io.lettuce.core.RedisCommandExecutionException;
+import io.lettuce.core.RedisException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -51,12 +53,10 @@ public class UserServiceImpl implements IUserService {
             user.setPassword(newPassword);
             user.setSalt(salt);
             count=mapper.savaUser(user);
-
         }
         if (count!=1){
             throw new InsertException("发生未知异常");
         }
-
         return count;
     }
 
@@ -76,19 +76,6 @@ public class UserServiceImpl implements IUserService {
     public User selectByName(String name) {
         User user=mapper.selectUserByName(name);
         return user;
-    }
-
-    @Override
-    public Integer updateUser(User user) {
-        Integer id=user.getId();
-        if(mapper.selectUserById(user.getId())==null){
-            throw new QueryException("查无此人");
-        }
-        int count=mapper.modifyUser(user);
-        if (count!=1){
-            throw new UpdateException("发生未知错误");
-        }
-        return count;
     }
 
     @Override
@@ -135,21 +122,29 @@ public class UserServiceImpl implements IUserService {
 
     }
     @Override
-    public void modifyInfo(Integer id,String name,Integer age,String gender,String phone,String email) {
+    public void modifyInfo(Integer id,String name,Integer age,String gender,String phone,String email,String oldName) {
             User user=mapper.selectUserById(id);
             if(user==null){
                 throw new UserExistException("用户不存在");
             }
-            user=mapper.selectUserByName(name);
-            if(user!=null){
+            if(mapper.selectUserByName(name)!=null){
                 throw new UserExistException("用户已存在");
             }
-            user.setPhone(phone);
-            user.setName(name);
-            user.setGender(gender);
-            user.setEmail(email);
-            user.setAge(age);
-            mapper.modifyUser(user);
+           try{
+               redisTemplate.rename(oldName+"_hasTicket",name+"_hasTicket");
+               redisTemplate.rename(oldName+"_preTicket",name+"_preTicket");
+           }catch (Exception e){
+               System.out.println("忽略");
+           }
+           finally {
+               System.out.println("执行了");
+               user.setPhone(phone);
+               user.setName(name);
+               user.setGender(gender);
+               user.setEmail(email);
+               user.setAge(age);
+               mapper.modifyUser(user);
+           }
     }
 //需要事务管理、需要多线程开发
     @Override

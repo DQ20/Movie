@@ -2,34 +2,28 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>数字钱包</title>
-    <link rel="stylesheet" type="text/css" href="../css/wallet.css">
+    <link rel="stylesheet" href="../css/wallet.css">
 </head>
 <body>
     <div id="sidebar">
-      <div>1</div>
-      <div>2</div>
-      <!-- 此处省略了其他项目以缩短示例 -->
-      <div>99</div>
-      <div>100</div>
-        <!-- 左侧固定列表 -->
-        <!-- 添加大量数据项以测试滚动功能 -->
+        <h3>历史记录</h3>
     </div>
     <div id="content">
         <div id="balance-container">
             <div id="balance">
-                <h1 class="balance">余额：$100.00</h1>
+                <h1 class="balance">余额：<p>Loading</p></h1>
             </div>
             <button id="recharge-button">充值</button>
         </div>
         <div id="movie-tickets">
-          <h2 class="toggleHas">已购电影票：</h2>
-          <div id="movie-tickets-list" class="showHas">
-              
-          </div>
-      </div>
+            <h2 class="toggleHas">已购电影票：</h2>
+            <div id="movie-tickets-list" class="showHas">
+                <p>Loading</p>
+            </div>
+        </div>
     </div>
     <script src="../js/JQuery.js"></script>
     <script src="../js/wallet.js"></script>

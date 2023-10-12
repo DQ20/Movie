@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.http.HttpResponse;
@@ -66,7 +67,7 @@ public class UserController extends BaseController{
         String email=jsonObject.getString("email");
         String phone=jsonObject.getString("phone");
         session.setAttribute("uname",name);
-        service.modifyInfo(id,name,age,gender,phone,email);
+        service.modifyInfo(id,name,age,gender,phone,email,oldName);
         Integer walletId=walletService.selectWalletByName(oldName).getId();
         walletService.updateWalletInfo(walletId,name);
         User user = service.selectByName(name);

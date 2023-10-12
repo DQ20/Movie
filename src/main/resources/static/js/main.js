@@ -21,17 +21,18 @@ document.addEventListener("DOMContentLoaded", function () {
         button.addEventListener("click",function(){
             let movieElement=button.closest('.movie')
             let movieId = movieElement.getAttribute('data-movie-id');
+            console.log("电影id为："+movieId)
             $.ajax({
                 url: "/user/buyTicket",
-                method: "POST",
+                method: "GET",
                 data: {
                     id: movieId
                 },
                 success: function (reponse){
-
+                    console(reponse.state)
                 },
                 error: function (xhr) {
-
+                    console("失败"+response.status)
                 }
             })
         })

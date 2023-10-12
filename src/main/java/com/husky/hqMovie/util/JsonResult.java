@@ -1,13 +1,25 @@
 package com.husky.hqMovie.util;
 
+import com.husky.hqMovie.pojo.Ticket;
 import com.husky.hqMovie.service.ex.ServiceException;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 public class JsonResult<E> implements Serializable {
     private Integer state;
     private String massage;
     private E data;
+    private List<Map> tickets;
+
+    public List<Map> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Map> tickets) {
+        this.tickets = tickets;
+    }
 
     public JsonResult() {
     }

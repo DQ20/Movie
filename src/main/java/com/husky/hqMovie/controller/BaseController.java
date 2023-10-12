@@ -6,6 +6,7 @@ import com.husky.hqMovie.service.ex.userEx.PasswordNotTrueException;
 import com.husky.hqMovie.service.ex.userEx.UserExistException;
 import com.husky.hqMovie.service.ex.walletEx.BalanceException;
 import com.husky.hqMovie.service.ex.walletEx.UpdateMoneyException;
+import com.husky.hqMovie.service.ex.walletEx.WalletExistException;
 import com.husky.hqMovie.util.JsonResult;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -33,6 +34,9 @@ public class BaseController {
         else if(e instanceof BalanceException){
             result.setMassage(e.getMessage());
             result.setState(411);
+        } else if (e instanceof WalletExistException) {
+            result.setMassage(e.getMessage());
+            result.setState(402);
         }
         return result;
     }

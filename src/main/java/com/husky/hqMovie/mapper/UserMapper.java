@@ -29,7 +29,7 @@ public interface UserMapper {
     List<User> selectAll();
     @Delete("delete from t_users where uid=#{id}")
     Integer deleteById(Integer id);
-    @Update("update t_users set gender=#{gender},age=#{age},email=#{email},phone=#{phone},salt=#{salt},password=#{password} where name=#{name}")
+    @Update("update t_users set name=#{name},gender=#{gender},age=#{age},email=#{email},phone=#{phone},salt=#{salt},password=#{password} where id=#{id}")
     @ResultMap("baseUserMap")
     Integer modifyUser(User user);
     @Delete(

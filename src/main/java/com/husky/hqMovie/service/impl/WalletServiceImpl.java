@@ -4,9 +4,11 @@ import com.husky.hqMovie.mapper.WalletMapper;
 import com.husky.hqMovie.pojo.Wallet;
 import com.husky.hqMovie.service.IWalletService;
 import com.husky.hqMovie.service.ex.walletEx.UpdateMoneyException;
+import com.husky.hqMovie.service.ex.walletEx.WalletExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class WalletServiceImpl implements IWalletService {
@@ -30,6 +32,9 @@ public class WalletServiceImpl implements IWalletService {
     @Override
     public int topUp(String name, Double balance) {
         Wallet wallet=mapper.selectWalletByName(name);
+        if(wallet==null){
+            throw new WalletExistException("账户不存在");
+        }
         balance+=wallet.getBalance();
         wallet.setBalance(balance);
         count=mapper.updateWallet(wallet);
@@ -61,6 +66,7 @@ public class WalletServiceImpl implements IWalletService {
     public Wallet selectWalletByName(String name) {
         Wallet wallet=mapper.selectWalletByName(name);
         return wallet;
+
     }
 
     @Override
