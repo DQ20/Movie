@@ -1,0 +1,121 @@
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 20%;
+    background-color: #f0f0f0;
+    overflow: auto; /* 添加滚动条 */
+}
+#content {
+    margin-left: 20%; /* 创建空间以避免重叠 */
+}
+#balance-container {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+#balance {
+    text-align: center;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex-grow: 1;
+    transition: all 0.3s ease; /* 添加过渡效果 */
+}
+#recharge-button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 20%;
+    background-color: #f0f0f0;
+    overflow: auto;
+}
+
+#content {
+    margin-left: 20%;
+}
+
+#balance-container {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#balance {
+    text-align: center;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex-grow: 1;
+    transition: all 0.3s ease;
+}
+
+#recharge-button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#movie-tickets {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+#movie-tickets h2 {
+    cursor: pointer;
+}
+
+.showHas {
+    display: block;
+}
+
+.sidebar-movie {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.sidebar-movie:hover {
+    background-color: #e0e0e0;
+}
+
+#movie-tickets-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.showHas-movie {
+    flex: 0 0 calc(31.6% - 10px);
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.showHas-movie:nth-child(3n) {
+    margin-right: 0;
+}

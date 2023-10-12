@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人主页</title>
+    <link rel="stylesheet" type="text/css" href="../css/user.css">
+</head>
+<body>
+    <div class="box">
+        <div class="infoU">
+            <div class="name"><p></p></div>
+            <div class="age"><p></p></div>
+            <div class="gender"><p></p></div>
+            <div class="registerTime"><p></p></div>
+            <div class="email"><p></p></div>
+            <div class="phone"><p></p></div>
+        </div> 
+        <div class="btn">
+            <button class="modifyInfo">修改信息</button>
+            <button class="modifyPassword">修改密码</button>
+        </div> 
+    </div>
+<!--修改密码的弹窗-->
+    <div class="modal" id="passwordModal">
+        <div class="modal-content">
+            <h2>修改密码</h2>
+            <input type="password" placeholder="输入原密码" id="oldPasswordInput"><br>
+            <input type="password" placeholder="输入新密码" id="newPasswordInput"><br>
+            <input type="password" placeholder="再次输入新密码" id="confirmNewPasswordInput"><br>
+            <button class="closeModel">取消</button>
+            <button class="changePassword">确认</button>
+        </div>
+    </div>
+    <!-- 修改信息的弹窗 -->
+    <div class="modal" id="infoModal">
+        <div class="modal-content">
+            <h2>修改信息</h2>
+            <input type="text" placeholder="名字" id="nameInput"><br>
+            <input type="text" placeholder="年龄" id="ageInput"><br>
+            <input type="text" placeholder="性别" id="genderInput"><br>
+            <input type="text" placeholder="手机号" id="phoneInput"><br>
+            <input type="text" placeholder="邮箱" id="emailInput"><br>
+            <button class="closeInfoModel">取消</button>
+            <button class="saveInfo">保存</button>
+        </div>
+    </div>
+
+    <script src="../js/JQuery.js"></script>
+    <script src="../js/user.js"></script>
+</body>
+</html>
